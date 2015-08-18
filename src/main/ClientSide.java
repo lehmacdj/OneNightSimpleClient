@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class ClientSide {
     static final int PORT = 9100;
     static final String HOST = "localhost";
+    static String uuid;
     
     public static void main(String[] args) throws IOException {
         try (
@@ -18,6 +19,13 @@ public class ClientSide {
             String fromServer;
             while ((fromServer = in.readLine()) != null) {
                 System.out.println(fromServer);
+                Scanner parse = new Scanner(fromServer);
+                parse.useDelimiter("=");
+                if (parse.next().equals("uuid")) {
+                    String uuidString = parse.next();
+                    System.out.println(uuidString);
+                    uuid = uuidString;
+                }
             }
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host " + HOST);
@@ -38,7 +46,7 @@ public class ClientSide {
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             ) {
                 while (true) {
-                    out.println(scan.nextLine());
+                    out.println(uuid + " " + scan.nextLine());
                 }      
             } catch (IOException e) {
                 System.err.println("Couldn't get I/O for the connection to " + HOST + " whilest in UIThread");
