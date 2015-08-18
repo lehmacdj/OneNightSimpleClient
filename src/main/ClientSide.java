@@ -27,7 +27,7 @@ public class ClientSide {
             System.exit(0);
         }
     }    
-    private static class UIThread extends Thread{
+    private static class UIThread extends Thread {
         Socket socket = null;
         public UIThread(Socket s) {
             socket = s;
