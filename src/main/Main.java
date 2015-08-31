@@ -4,11 +4,15 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+import roles.*;
 
 public class Main {
     static final int PORT = 9100;
     static final String HOST = "localhost";
+    
     static String uuid;
+    static final ArrayList<String> roles = new ArrayList<>();
+    static final ArrayList<String> players = new ArrayList<>();
     
     public static void main(String[] args) throws IOException {
         try (
@@ -31,6 +35,13 @@ public class Main {
                         out.println(uuid + " " + scan.nextLine());
                     } else if (message.get(0).equals("uuid")) {
                         uuid = message.get(1);
+                    } else if (message.get(0).equals("set")) {
+                        Scanner toRoles = new Scanner(message.get(1));
+                        toRoles.useDelimiter(",");
+                        while (toRoles.hasNext()) {
+                            roles.add(toRoles.next());
+                        }
+                        System.out.println(roles);
                     } else {
                         System.out.println(fromServer);
                     }

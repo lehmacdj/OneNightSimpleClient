@@ -1,8 +1,8 @@
-nbproject/private/
-build/
-nbbuild/
-nbdist/
-nbactions.xml
-nb-configuration.xml
+#Eclipse Project Files
+bin/
+.project
+.classpath
+util/
 
-/dist/
+#DS_Store -- in case it crops up
+.DS_Store
