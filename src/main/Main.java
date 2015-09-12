@@ -15,23 +15,28 @@ public class Main {
     static final ArrayList<String> players = new ArrayList<>();
     
     public static void main(String[] args) throws IOException {
+    	
+    	//init objects to to use throughout the code
         try (
             Socket socket = new Socket(HOST, PORT);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             Scanner scan = new Scanner(System.in);
         ) {
+        	
+        	//get the message
             String fromServer;
             while ((fromServer = in.readLine()) != null) {
+            	System.out.println(fromServer);
                 Scanner parse = new Scanner(fromServer);
                 parse.useDelimiter("=");
                 ArrayList<String> message = new ArrayList<>();
                 while (parse.hasNext()) {
                     message.add(parse.next());
                 }
+                parse.close();
                 if (!message.isEmpty()) {
                     if (message.get(0).equals(">>>")) {
-                        System.out.print(">>>");
                         out.println(uuid + " " + scan.nextLine());
                     } else if (message.get(0).equals("uuid")) {
                         uuid = message.get(1);
@@ -41,9 +46,10 @@ public class Main {
                         while (toRoles.hasNext()) {
                             roles.add(toRoles.next());
                         }
+                        toRoles.close();
                         System.out.println(roles);
                     } else {
-                        System.out.println(fromServer);
+                        
                     }
                 }
             }
