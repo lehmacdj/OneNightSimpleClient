@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Main {
     static final int PORT = 9100;
-    static final String HOST = "localhost";
+    static final String HOST = "lehmacdj.me";
     
     static String uuid;
     static final ArrayList<String> roles = new ArrayList<>();
